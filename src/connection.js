@@ -5,7 +5,7 @@ let connection = null;
 function getConnetion(){
 
     if(connection === null){
-        connection = getFirestore;
+        connection = getFirestore();
     }
 
     return connection;

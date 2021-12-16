@@ -4,12 +4,14 @@ const req = require("express/lib/request");
 
 const app = express();
 
-const firebase = require("./helper/firebase-config");
+require("./helper/firebase-config");
 const modelToko =  require("./src/toko");
 
-app.post('/create/toko', async (req,res) =>{
+app.post('/create/toko', express.json(), async (req,res) =>{
 
-    const {email} = req.params;
+    const {nama, deskripsi, email, alamat, noTelp, foto, banner} = req.body;
+
+    console.log(req.body);
 
     const resRegister = await modelToko.registerToko(nama, deskripsi, email, alamat, noTelp, foto, banner);
 
@@ -17,7 +19,7 @@ app.post('/create/toko', async (req,res) =>{
         res.status(200).json({message:"Toko Berhasil Didaftarkan!"});
         return;
     }
-
+    
     res.status(500).json({message:"Toko Gagal Didaftarkan!"});
 });
 
@@ -34,3 +36,5 @@ app.get('/get/staff/:email', async (req,res) =>{
     
     return;
 })
+
+app.listen(4500);
