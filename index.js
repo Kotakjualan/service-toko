@@ -23,7 +23,9 @@ app.post('/create/toko', express.json(), async (req,res) =>{
     res.status(500).json({message:"Toko Gagal Didaftarkan!"});
 });
 
-app.get('/get/staff/:email', async (req,res) =>{
+
+//get nya masih salah krn masih bisa nemu toko yang ga terdaftar
+app.get('/get/toko/:email', async (req,res) =>{
 
     const {email} = req.params;
 
