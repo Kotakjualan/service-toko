@@ -1,5 +1,5 @@
 const { async } = require("@firebase/util");
-const { doc, setDoc, getDoc} =  require("firebase/firestore");
+const { doc, setDoc, getDoc, deleteField, deleteDoc} =  require("firebase/firestore");
 const connection =  require("./connection");
 
 function getCollection(){
@@ -30,6 +30,20 @@ async function registerToko(nama, deskripsi, email, alamat, noTelp, foto, banner
     return true;
 }
 
+async function deleteToko(email){
+
+    const docToko = doc(connection.getConnetion(),getCollection(), email);
+
+    const data = await deleteDoc(docToko,{email: deleteField()});
+
+    const objRespond = {
+        status: false,
+        data: null
+    }
+
+    return true;
+}
+
 async function checkToko(email){
 
     const docToko = doc(connection.getConnetion(),getCollection(), email);
@@ -51,4 +65,4 @@ async function checkToko(email){
     return objRespond;
 }
 
-module.exports = {registerToko,checkToko};
+module.exports = {registerToko, checkToko, deleteToko};
