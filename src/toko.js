@@ -37,11 +37,11 @@ async function checkToko(email){
     const data = await getDoc(docToko);
 
     const objRespond = {
-        status: false.status,
+        status: false,
         data: null
     }
 
-    if(!data.exists){
+    if(!data.exists()){
         return objRespond;
     }
 
